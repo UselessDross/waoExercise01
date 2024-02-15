@@ -1,41 +1,42 @@
-// https://nodejs.org/en/docs/guides/getting-started-guide/
-
-//const express = require('express')
-// same as:
-const http = require('http');
+const express = require('express')
+const app = express()
 
 
+ const hostname = '127.0.0.1';
+ const port = 3000;
 
-const hostname = '127.0.0.1';
-const port = 3000;
+ let products = [];
 
-const server = http.createServer((req: any, res: any) => {
-  if(req.url ==='/pin'){ 
-                       res.statusCode = 200;
-                       res.setHeader('Content-Type', 'text/plain');
-                       res.end('Pong')
-                       }
-  
-  else{
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World');}
-});
+ app.post('/post', function (req:any, res:any) {
+                                               res.statusCode = 200;
+                                               res.setHeader('Content-Type', 'text/plain');
+                                               res.end('You cannot post anything');
+                                               });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+ app.put('/put', function (req:any, res:any) {
+                                             res.statusCode = 200;
+                                             res.setHeader('Content-Type', 'text/plain');
+                                             res.end('You cannot chage anything');
+                                             });
+
+ app.delete('/delete', function (req:any, res:any) {
+                                                   res.statusCode = 200;
+                                                   res.setHeader('Content-Type', 'text/plain');
+                                                   res.end('there is nothing for you to delete')
+                                                   });
+
+ app.get('/', (req:any, res:any) => {
+                                    res.statusCode = 200;
+                                    res.setHeader('Content-Type', 'text/plain');
+                                    res.end('Hello World');
+                                    })
+ app.get('/ping', (req:any, res:any) => {
+                                        res.statusCode = 200;
+                                        res.setHeader('Content-Type', 'text/plain');
+                                        res.end('Pong')
+                                        })
 
 
-/* ==== Subjective Observation 00: ====
-   what the server is, and the host 
-   beigns apper to be at line 12.
-   at the same time the server gets 
-   created, its inictial routing also
-   gets established, as its parameter.
-   interestingly within the body here,
-   we are also able to establish 
-   conditional rout depending on the url.
-   lastly, on line 25 and onwords, seem
-   to establish the inicial ip-address.
-   ====================================*/ 
+ app.listen(port, hostname, () => {
+    console.log(`Server running at http://${hostname}:${port}/`);
+  });
